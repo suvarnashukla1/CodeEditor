@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/socket.io': {
-        target: 'https://editor-server-4yde.onrender.com',
+        target: 'http://localhost:3001',
         changeOrigin: true,
         secure: false,
         ws: true
