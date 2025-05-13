@@ -1,3 +1,4 @@
+// src/pages/Editor.jsx
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CodeEditor from "../Components/CodeEditor";
@@ -6,34 +7,26 @@ import Footer from "../Components/Footer";
 import socket from '../utils/Socket';
 
 const Editor = () => {
-  const { roomId, username } = useParams();  // Access both roomId and username from URL params
+  const { roomId, username } = useParams();
   const [code, setCode] = useState('// give code here');
   const [users, setUsers] = useState([]);
 
-  // Setup to join room when component mounts
   useEffect(() => {
     if (roomId && username) {
-      // Join the room via socket (emits once when component mounts)
       socket.emit("join-room", { roomId, username });
-      console.log('Joining room:', roomId, username);
 
-      // Setup listeners for code and users
       socket.on('initial-code', (initialCode) => {
-        console.log('Received initial code:', initialCode); // Debug log
         setCode(initialCode);
       });
 
       socket.on('code-update', (updatedCode) => {
-        console.log("Received updated code:", updatedCode); // Debug log
         setCode(updatedCode);
       });
 
       socket.on('user-list', (userList) => {
-        console.log("Received user list:", userList); // Debug log
         setUsers(userList);
       });
 
-      // Cleanup when component is unmounted or roomId changes
       return () => {
         socket.off('initial-code');
         socket.off('code-update');
@@ -44,10 +37,8 @@ const Editor = () => {
 
   const copyRoomId = () => {
     navigator.clipboard.writeText(roomId);
-    // Optionally, you can add some feedback to the user that the ID was copied
   };
 
-  // Ensure both roomId and username are present
   if (!roomId || !username) {
     return <div className="text-red-500 p-4">Missing room or username in the URL</div>;
   }
@@ -58,11 +49,10 @@ const Editor = () => {
         Minimalist Code Editor
       </h1>
       <div className="flex m-10">
-        {/* Left sidebar */}
         <div className="w-1/4 pr-4 text-gray-400">
           <div className="mb-4">
             <div className="flex items-center space-x-2">
-              <h2 className="text-white font-bold">Room_id: {roomId}</h2>
+              <h2 className="text-white font-bold">Room ID: {roomId}</h2>
               <button 
                 className="bg-[#21293B] p-1 rounded hover:text-[#a08521] text-sm"
                 onClick={copyRoomId}
@@ -81,11 +71,10 @@ const Editor = () => {
           </div>
         </div>
 
-        {/* Main content */}
         <div className="w-3/4">
           <div className="mb-2 flex justify-between items-center">
             <span className="text-white font-bold">
-              Code 
+              Code
               <button 
                 className="bg-[#21293B] p-1 rounded text-xl hover:text-[#a08521] text-gray-400 ml-2"
                 onClick={() => navigator.clipboard.writeText(code)}
@@ -94,11 +83,7 @@ const Editor = () => {
               </button>
             </span>
           </div>
-          <CodeEditor
-            code={code}
-            setCode={setCode}
-            roomId={roomId}
-          />
+          <CodeEditor code={code} setCode={setCode} roomId={roomId} />
         </div>
       </div>
       <Footer />

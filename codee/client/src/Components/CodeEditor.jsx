@@ -1,15 +1,27 @@
 import PropTypes from 'prop-types';
 import Editor from "@monaco-editor/react";
 import socket from "../utils/Socket";
+import { useEffect } from "react";
 
 const CodeEditor = ({ code, setCode, roomId }) => {
-  const handleEditorChange = (newCode) => {
-    setCode(newCode);
-    console.log("Emitting code change:", newCode);
-    socket.emit('code-change', roomId, newCode);
+  // Emit code change
+  const handleEditorChange = (value) => {
+    setCode(value);
+    socket.emit("code-change", { roomId, newCode: value });
   };
 
-  return (
+  // Listen for remote code updates
+  useEffect(() => {
+    socket.on("code-update", (updatedCode) => {
+      setCode(updatedCode);
+    });
+
+    return () => {
+      socket.off("code-update");
+    };
+  }, [roomId, setCode]);
+
+  return typeof code === "string" ? (
     <Editor
       height="80vh"
       defaultLanguage="javascript"
@@ -18,15 +30,14 @@ const CodeEditor = ({ code, setCode, roomId }) => {
       options={{
         minimap: { enabled: false },
         fontSize: 16,
-        suggestOnTriggerCharacters: true,
-        quickSuggestions: true,
         lineNumbers: "on",
-        roundedSelection: false,
         scrollBeyondLastLine: true,
         automaticLayout: true,
       }}
       theme="vs-dark"
     />
+  ) : (
+    <div className="text-red-500 p-4">Loading code editor...</div>
   );
 };
 
