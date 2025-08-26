@@ -3,7 +3,7 @@
 *A lightweight, blazing-fast code editor built for the modern web.*
 
 
-## ✨ Features
+##  Features
 
 - **Blazing Fast Performance:** Built with performance in mind, using a modern tech stack for a snappy UI.
 - **Multi-Language Syntax Highlighting:** Out-of-the-box support for JavaScript, TypeScript, HTML, CSS, Python, and Markdown.
@@ -14,7 +14,7 @@
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Framework:** [React](https://reactjs.org/) & [Vite](https://vitejs.dev/)
 - **Editor Core:** [Monaco Editor](https://microsoft.github.io/monaco-editor/) (The engine that powers VS Code)
