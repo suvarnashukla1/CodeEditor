@@ -2,26 +2,21 @@
 
 *A lightweight, blazing-fast code editor built for the modern web.*
 
+## ✨ Features
 
-##  Features
-
-- **Blazing Fast Performance:** Built with performance in mind, using a modern tech stack for a snappy UI.
-- **Multi-Language Syntax Highlighting:** Out-of-the-box support for JavaScript, TypeScript, HTML, CSS, Python, and Markdown.
+- **👥 Real-Time Collaboration:** Code together with multiple users in the same workspace. See cursors, selections, and changes live.
 - **Intelligent Code Completion:** Context-aware suggestions to speed up your coding workflow.
-- **Command Palette:** Access all functionality from your keyboard with a VS Code-style command palette (`Ctrl+Shift+P`).
 - **Built-in Markdown Preview:** Write documentation and preview it live, side-by-side.
 - **Customizable Themes:** Ships with beautiful default light (Solarized) and dark (Noctis) themes.
 
 ---
-
-##  Tech Stack
+## 🛠️ Tech Stack
 
 - **Framework:** [React](https://reactjs.org/) & [Vite](https://vitejs.dev/)
-- **Editor Core:** [Monaco Editor](https://microsoft.github.io/monaco-editor/) (The engine that powers VS Code)
+- **Editor Core:** [Monaco Editor](https://microsoft.github.io/monaco-editor/)
+- **Real-Time Communication:** [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) with [Socket.IO](https://socket.io/)
+- **Backend:** [Node.js](https://nodejs.org/), [Express](https://expressjs.com/)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Desktop App:** [Tauri](https://tauri.app/) (Optional, for building a desktop version)
-
----
 
 ## 🚀 Getting Started
 
