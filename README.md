@@ -1,4 +1,4 @@
-# Code Editor 📝
+# Code Editor
 
 *A lightweight, blazing-fast code editor built for the modern web.*
 
